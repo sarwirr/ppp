@@ -5,7 +5,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { Todo } from 'src/todo1/entities/todo1.entity';
+import { File } from 'src/todo1/entities/file.entity';
 
 const hat = require('hat');
 

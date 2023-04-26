@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { Todo } from 'src/todo1/entities/todo1.entity';
+import { File } from 'src/todo1/entities/file.entity';
 import { Roles } from 'src/roles.enum';
 import { Notification } from 'src/notification/entities/notification.entity';
 export type UserDocument = HydratedDocument<User>;
@@ -27,9 +27,9 @@ export class User {
     password: string;
 
     @Prop({
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: () => Todo }]
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: () => File }]
     })
-    todolist: Todo[];
+    todolist: File[];
 
 
     @Prop({

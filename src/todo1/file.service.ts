@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateTodo1Dto } from './dto/create-todo1.dto';
 import { UpdateTodo1Dto } from './dto/update-todo1.dto';
-import { Todo, TodoDocument } from './entities/todo1.entity';
+import { File, FileDocument } from './entities/file.entity';
 import { User, UserDocument } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { NotificationService } from 'src/notification/notification.service';
@@ -13,7 +13,7 @@ import { NotificationService } from 'src/notification/notification.service';
 @Injectable()
 export class Todo1Service {
   todoRepository: any;
-  constructor(@InjectModel(Todo.name) private todoModel: Model<TodoDocument>,
+  constructor(@InjectModel(File.name) private todoModel: Model<FileDocument>,
   @InjectModel(User.name) private userRepository: Model<UserDocument>,
   private readonly us : UserService,
   private readonly ns: NotificationService) {}
@@ -49,11 +49,11 @@ export class Todo1Service {
     return savedtodo;
   }
 
-  async findAll(): Promise<Todo[]> {
+  async findAll(): Promise<File[]> {
     return this.todoModel.find().populate('owner').exec();
   }
 
-  async findOne(id: string): Promise<Todo> {
+  async findOne(id: string): Promise<File> {
     return this.todoModel.findOne({
        _id: id 
     });

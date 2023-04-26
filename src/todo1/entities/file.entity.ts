@@ -3,10 +3,10 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { User } from 'src/user/entities/user.entity';
 
 
-export type TodoDocument = HydratedDocument<Todo>;
+export type FileDocument = HydratedDocument<File>;
 
 @Schema()
-export class Todo {
+export class File {
 
   _id;
   
@@ -40,4 +40,4 @@ export class Todo {
 
 }
 
-export const TodoSchema = SchemaFactory.createForClass(Todo);
+export const TodoSchema = SchemaFactory.createForClass(File);
