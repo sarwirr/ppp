@@ -17,8 +17,8 @@ export class File {
   description: string;
 
   @Prop()
-  status: boolean;
-
+  file: string;
+  
   @Prop()
   createdAt: Date;
 

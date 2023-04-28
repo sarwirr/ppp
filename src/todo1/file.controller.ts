@@ -8,11 +8,18 @@ import {
   Delete,
   UseGuards,
   Request,
+  UseInterceptors,
+  Optional,
+  UploadedFile,
 } from '@nestjs/common';
 import { Todo1Service } from './file.service';
 import { CreateTodo1Dto } from './dto/create-todo1.dto';
 import { UpdateTodo1Dto } from './dto/update-todo1.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiConsumes } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import uniqueFileName from 'src/utils/uniqueFileName';
 
 @UseGuards(JwtAuthGuard)
 @Controller('todo1')
@@ -43,9 +50,32 @@ export class Todo1Controller {
     return this.todo1Service.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTodo1Dto: UpdateTodo1Dto) {
-    return this.todo1Service.update(id, updateTodo1Dto);
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateTodo1Dto: UpdateTodo1Dto) {
+  //   return this.todo1Service.update(id, updateTodo1Dto);
+  // }
+
+  @Patch('/update/:id')
+  @UseGuards(JwtAuthGuard)
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      storage: diskStorage({
+        destination: './public/uploads/profiles/avatar',
+        filename: uniqueFileName,
+      }),
+    }),
+  )
+  async updateProfile(
+    @Param('id') id: string,
+    @Optional()@UploadedFile() avatar: Express.Multer.File,
+    @Optional()@Body() updateProfileDto: UpdateTodo1Dto,
+  ) {
+    return await this.todo1Service.updateProfile(
+      id,
+      avatar,
+      updateProfileDto,
+    );
   }
 
   @Delete(':id')

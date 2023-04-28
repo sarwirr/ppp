@@ -12,6 +12,7 @@ import { NotificationService } from 'src/notification/notification.service';
 
 @Injectable()
 export class Todo1Service {
+  
   todoRepository: any;
   constructor(@InjectModel(File.name) private todoModel: Model<FileDocument>,
   @InjectModel(User.name) private userRepository: Model<UserDocument>,
@@ -66,5 +67,26 @@ export class Todo1Service {
   async remove(id: any) {
     await this.todoModel.findOneAndDelete({ _id: id });
  
+  }
+  async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
+    let photo = this.profileImage(avatar);
+    try {
+      return await this.us.update(
+        id,
+        { ...updateProfileDto, profileImage: photo },
+        // { new: true },
+      );
+    }
+    catch (err) {
+      throw new Error(`Error updating ${this.us}: ${err}`);
+    }
+  }
+
+  profileImage(avatar: Express.Multer.File): string {
+    let photo;
+    if (avatar) {
+      photo = avatar.path.replace('public', '').split('\\').join('/');
+    }
+    return photo;
   }
 }
