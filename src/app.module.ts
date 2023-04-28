@@ -8,9 +8,13 @@ import { todo1Middleware } from './todo1/file.middleware';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { NotificationModule } from './notification/notification.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register({
+    dest: './uploads',
+  }),
     Todo1Module,
     MongooseModule.forRoot(
       'mongodb+srv://sarwir:UwOupSTJqhj6MUNe@cluster0.36mf4ku.mongodb.net/pppp?retryWrites=true&w=majority',
@@ -19,7 +23,7 @@ import { NotificationModule } from './notification/notification.module';
     AuthModule,
     NotificationModule,
   ],
-  controllers: [AppController, Todo1Controller],
+  controllers: [AppController, Todo1Controller,  ],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
