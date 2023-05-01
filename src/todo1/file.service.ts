@@ -68,10 +68,10 @@ export class Todo1Service {
     await this.todoModel.findOneAndDelete({ _id: id });
  
   }
-  async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
+  async updatefile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
     let photo = this.profileImage(avatar);
     try {
-      return await this.us.update(
+      return await this.update(
         id,
         { ...updateProfileDto, profileImage: photo },
         // { new: true },

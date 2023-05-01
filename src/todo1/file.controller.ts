@@ -55,13 +55,13 @@ export class Todo1Controller {
   //   return this.todo1Service.update(id, updateTodo1Dto);
   // }
 
-  @Patch('/update/:id')
+  @Patch('/upload')
   @UseGuards(JwtAuthGuard)
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
-    FileInterceptor('avatar', {
+    FileInterceptor('file', {
       storage: diskStorage({
-        destination: './public/uploads/profiles/avatar',
+      //  destination: './public/uploads/profiles/avatar',
         filename: uniqueFileName,
       }),
     }),
@@ -71,7 +71,7 @@ export class Todo1Controller {
     @Optional()@UploadedFile() avatar: Express.Multer.File,
     @Optional()@Body() updateProfileDto: UpdateTodo1Dto,
   ) {
-    return await this.todo1Service.updateProfile(
+    return await this.todo1Service.updatefile(
       id,
       avatar,
       updateProfileDto,
