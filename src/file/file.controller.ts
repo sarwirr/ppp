@@ -13,8 +13,8 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { Todo1Service } from './file.service';
-import { CreateTodo1Dto } from './dto/create-todo1.dto';
-import { UpdateTodo1Dto } from './dto/update-todo1.dto';
+import { CreateTodo1Dto } from './dto/create-file.dto';
+import { UpdateTodo1Dto } from './dto/update-file.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';

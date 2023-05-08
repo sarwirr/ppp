@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { File } from 'src/todo1/entities/file.entity';
+import { File } from 'src/file/entities/file.entity';
 import { Roles } from 'src/roles.enum';
 import { Notification } from 'src/notification/entities/notification.entity';
 export type UserDocument = HydratedDocument<User>;

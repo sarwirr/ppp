@@ -2,8 +2,8 @@ import { Model } from 'mongoose';
 
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateTodo1Dto } from './dto/create-todo1.dto';
-import { UpdateTodo1Dto } from './dto/update-todo1.dto';
+import { CreateTodo1Dto } from './dto/create-file.dto';
+import { UpdateTodo1Dto } from './dto/update-file.dto';
 import { File, FileDocument } from './entities/file.entity';
 import { User, UserDocument } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';

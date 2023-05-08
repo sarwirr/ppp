@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Todo1Controller } from './todo1/file.controller';
-import { Todo1Module } from './todo1/file.module';
+import { Todo1Controller } from './file/file.controller';
+import { Todo1Module } from './file/file.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { todo1Middleware } from './todo1/file.middleware';
+import { todo1Middleware } from './file/file.middleware';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { NotificationModule } from './notification/notification.module';
