@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { NotificationModule } from './notification/notification.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { MulterModule } from '@nestjs/platform-express';
   }),
     Todo1Module,
     MongooseModule.forRoot(
-      'mongodb+srv://sarwir:UwOupSTJqhj6MUNe@cluster0.36mf4ku.mongodb.net/pppp?retryWrites=true&w=majority',
+      'mongodb+srv://sarwir:UwOupSTJqhj6MUNe@cluster0.36mf4ku.mongodb.net/ppp_db?retryWrites=true&w=majority',
     ),
     UserModule,
     AuthModule,
@@ -28,6 +29,6 @@ import { MulterModule } from '@nestjs/platform-express';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(todo1Middleware).forRoutes('todo1');
+    // consumer.apply(todo1Middleware).forRoutes('todo1');
   }
 }

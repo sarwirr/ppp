@@ -13,6 +13,9 @@ export class File {
   @Prop()
   name: string;
 
+  @Prop() 
+  type : string;
+
   @Prop()
   description: string;
 
@@ -32,11 +35,9 @@ export class File {
   deleted: boolean;
 
   @Prop({
-    type: mongoose.Schema.Types.ObjectId, ref: () => "User" 
-})
+    type: mongoose.Schema.Types.ObjectId, ref: 'User' 
+  })
   owner: User;
-
-  
 
 }
 

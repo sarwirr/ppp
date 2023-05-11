@@ -30,13 +30,13 @@ export class UserService {
   }
 
   async findAllTodos(id:string): Promise<any> {
-    const user  = await this.userRepository.findOne({ _id :id}).populate('todolist').exec();
-    return user.todolist;
+    const user  = await this.userRepository.findOne({ _id :id}).populate('fileList').exec();
+    return user.fileList;
   }
 
   async findUserbyId(id: string): Promise<User> {
     // console.log(id);
-    return this.userRepository.findOne({ _id :id}).populate('todolist').exec();
+    return this.userRepository.findOne({ _id :id}).populate('fileList').exec();
   }
 
   async findnameofUserbyId(id: string) {

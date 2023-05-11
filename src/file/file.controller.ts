@@ -13,7 +13,6 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { Todo1Service } from './file.service';
-import { CreateTodo1Dto } from './dto/create-file.dto';
 import { UpdateTodo1Dto } from './dto/update-file.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiConsumes } from '@nestjs/swagger';
@@ -29,15 +28,26 @@ export class Todo1Controller {
 
   
   @Post()
-  create(@Body() createTodo1Dto: CreateTodo1Dto, @Request() req) {
-
-    return this.todo1Service.create(createTodo1Dto, req.user.userId);
+  @UseInterceptors(FileInterceptor('file'))
+  create(@Request() req, @UploadedFile() file: Express.Multer.File) {
+  return this.todo1Service.create(req.user.userId,file);
   }
 
-  @Post('createforuser/:id')
-  createforuser(@Body() createTodo1Dto: CreateTodo1Dto, @Param('id') id: string) {
-    return this.todo1Service.createforuser(createTodo1Dto, id);
-  }
+  // @Post('/uploadi')
+  // @UseInterceptors(FileInterceptor('file'))
+  // uploadFile(@UploadedFile() file: Express.Multer.File) {
+  //   console.log("hey!");
+  //   if (!file) {
+  //     throw new Error('No file provided');
+  //   }
+  //   console.log('File uploaded successfully:', file.originalname);
+  // }
+
+
+  // @Post('createforuser/:id')
+  // createforuser(@Body() createTodo1Dto: CreateTodo1Dto, @Param('id') id: string) {
+  //   return this.todo1Service.createforuser(createTodo1Dto, id);
+  // }
 
 
   @Get()

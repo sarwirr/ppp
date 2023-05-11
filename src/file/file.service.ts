@@ -1,13 +1,16 @@
 import { Model } from 'mongoose';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, UploadedFile } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateTodo1Dto } from './dto/create-file.dto';
 import { UpdateTodo1Dto } from './dto/update-file.dto';
 import { File, FileDocument } from './entities/file.entity';
 import { User, UserDocument } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { NotificationService } from 'src/notification/notification.service';
+import { UpdateUserDto } from 'src/user/dto/update-user.dto';
+import * as fs from 'fs';
+import { fromByteArray } from 'base64-js';
+import { CreateTodo1Dto } from './dto/create-file.dto';
 
 
 @Injectable()
@@ -19,36 +22,46 @@ export class Todo1Service {
   private readonly us : UserService,
   private readonly ns: NotificationService) {}
 
-  async create(createTodo1Dto: CreateTodo1Dto , id:any ) {
+  
+  async create(id:any ,@UploadedFile() file: Express.Multer.File) {
+    console.log(id);
     const user = await this.us.findUserbyId(id);
-    const createdtodo = new this.todoModel({...createTodo1Dto, owner: user._id} );
-    const savedtodo = await createdtodo.save();
-    // console.log(savedtodo._id.toString());
-    user.todolist.push(savedtodo);
-    await this.us.update(user.email, { todolist: user.todolist } as UpdateTodo1Dto);
-    return savedtodo;
-    
+    console.log(user);
+    const fileContent = fs.readFileSync(file.path);
+    const base64Content = fromByteArray(fileContent);
+    const createdFile =  await this.todoModel.create({ 
+      type: file.mimetype,
+      name: file.originalname,
+      file: base64Content,
+      owner: user._id
+    })
+    console.log(createdFile);
+    user.fileList.push(createdFile);
+    console.log(user.fileList);
+    await this.us.update(user.email, { fileList: user.fileList } as UpdateUserDto);
+    return { message: 'File uploaded successfully'};
+      
   }
 
-  async createforuser(createTodo1Dto: CreateTodo1Dto , id:any ) {
+  // async createforuser(createTodo1Dto: CreateTodo1Dto , id:any ) {
     
     
-    const user = await this.us.findUserbyId(id);
+  //   const user = await this.us.findUserbyId(id);
     
     
-    const createdtodo = new this.todoModel({...createTodo1Dto, owner: user._id} );
-    const savedtodo = await createdtodo.save();
+  //   const createdtodo = new this.todoModel({...createTodo1Dto, owner: user._id} );
+  //   const savedtodo = await createdtodo.save();
     
-    user.todolist.push(savedtodo);
-    await this.us.update(user.email, { todolist: user.todolist } as UpdateTodo1Dto);
+  //   user.todolist.push(savedtodo);
+  //   await this.us.update(user.email, { todolist: user.todolist } as UpdateTodo1Dto);
     
-    this.ns.create({
-      description: `You have a new todo : ${savedtodo.name}`,
-      user: user.name,
-    }, user._id);
+  //   this.ns.create({
+  //     description: `You have a new todo : ${savedtodo.name}`,
+  //     user: user.name,
+  //   }, user._id);
     
-    return savedtodo;
-  }
+  //   return savedtodo;
+  // }
 
   async findAll(): Promise<File[]> {
     return this.todoModel.find().populate('owner').exec();
