@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { NotificationModule } from './notification/notification.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
+require('dotenv').config(); 
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
   }),
     Todo1Module,
     MongooseModule.forRoot(
-      'mongodb+srv://sarwir:UwOupSTJqhj6MUNe@cluster0.36mf4ku.mongodb.net/ppp_db?retryWrites=true&w=majority',
+      process.env.MONGODB_KEY,
     ),
     UserModule,
     AuthModule,

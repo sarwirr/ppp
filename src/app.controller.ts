@@ -4,6 +4,8 @@ import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import {LocalAuthGuard} from './auth/local-auth.guard';
 import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+require('dotenv').config(); 
+
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService,
@@ -12,6 +14,7 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
+  
     return this.authService.login(req.user);
   }
   
