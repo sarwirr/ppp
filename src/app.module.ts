@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Todo1Controller } from './file/file.controller';
+import { FileController } from './file/file.controller';
 import { Todo1Module } from './file/file.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { todo1Middleware } from './file/file.middleware';
@@ -25,7 +25,7 @@ require('dotenv').config();
     AuthModule,
     NotificationModule,
   ],
-  controllers: [AppController, Todo1Controller,  ],
+  controllers: [AppController, FileController,  ],
   providers: [AppService],
 })
 export class AppModule implements NestModule {

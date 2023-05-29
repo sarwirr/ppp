@@ -24,7 +24,7 @@ export class UserController {
     return this.userService.findAll();
   }
   @UseGuards(JwtAuthGuard)
-  @Get('findalltodos')
+  @Get('findallfiles')
   findAllTodos(@Request() req ) {
     return this.userService.findAllTodos(req.user.userId);
   }

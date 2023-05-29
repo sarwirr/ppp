@@ -14,10 +14,10 @@ import { CreateTodo1Dto } from './dto/create-file.dto';
 
 
 @Injectable()
-export class Todo1Service {
+export class FileService {
   
   todoRepository: any;
-  constructor(@InjectModel(File.name) private todoModel: Model<FileDocument>,
+  constructor(@InjectModel(File.name) private fileModel: Model<FileDocument>,
   @InjectModel(User.name) private userRepository: Model<UserDocument>,
   private readonly us : UserService,
   private readonly ns: NotificationService) {}
@@ -29,7 +29,7 @@ export class Todo1Service {
     console.log(user);
     const fileContent = fs.readFileSync(file.path);
     const base64Content = fromByteArray(fileContent);
-    const createdFile =  await this.todoModel.create({ 
+    const createdFile =  await this.fileModel.create({ 
       type: file.mimetype,
       name: file.originalname,
       file: base64Content,
@@ -64,21 +64,22 @@ export class Todo1Service {
   // }
 
   async findAll(): Promise<File[]> {
-    return this.todoModel.find().populate('owner').exec();
+    return this.fileModel.find();
   }
 
   async findOne(id: string): Promise<File> {
-    return this.todoModel.findOne({
+    return this.fileModel.findOne({
        _id: id 
     });
   }
 
   update(id: string, updateTodo1Dto: UpdateTodo1Dto) {
-    return this.todoModel.findByIdAndUpdate(id, updateTodo1Dto);
+    return this.fileModel.findByIdAndUpdate(id, updateTodo1Dto);
   }
 
   async remove(id: any) {
-    await this.todoModel.findOneAndDelete({ _id: id });
+    await this.fileModel.findOneAndDelete({ _id: id });
+    return { message: 'File deleted successfully'};
  
   }
   async updatefile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {

@@ -41,7 +41,7 @@ export class UserService {
 
   async findnameofUserbyId(id: string) {
     const user = await this.userRepository.findOne({ _id :id}).populate('name').exec();
-    return user;
+    return ({username: user.name});
    
   }
 
