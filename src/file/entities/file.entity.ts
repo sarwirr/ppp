@@ -23,6 +23,9 @@ export class File {
   file: string;
   
   @Prop()
+  result: string;
+  
+  @Prop()
   createdAt: Date;
 
   @Prop()

@@ -70,6 +70,7 @@ export class FileController {
 
   @Delete(':id')
   remove(@Param('id') id: any) {
-    return this.FileService.remove(id);
+    return this.FileService.remove(id)
+    ;
   }
 }

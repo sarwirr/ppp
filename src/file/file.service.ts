@@ -24,9 +24,9 @@ export class FileService {
 
   
   async create(id:any ,@UploadedFile() file: Express.Multer.File) {
-    console.log(id);
+    // console.log(id);
     const user = await this.us.findUserbyId(id);
-    console.log(user);
+    // console.log(user);
     const fileContent = fs.readFileSync(file.path);
     const base64Content = fromByteArray(fileContent);
     const createdFile =  await this.fileModel.create({ 
@@ -35,34 +35,26 @@ export class FileService {
       file: base64Content,
       owner: user._id
     })
-    console.log(createdFile);
+    // console.log(createdFile);
     user.fileList.push(createdFile);
-    console.log(user.fileList);
+    // console.log(user.fileList);
     await this.us.update(user.email, { fileList: user.fileList } as UpdateUserDto);
     return { message: 'File uploaded successfully'};
       
   }
 
-  // async createforuser(createTodo1Dto: CreateTodo1Dto , id:any ) {
-    
-    
-  //   const user = await this.us.findUserbyId(id);
-    
-    
-  //   const createdtodo = new this.todoModel({...createTodo1Dto, owner: user._id} );
-  //   const savedtodo = await createdtodo.save();
-    
-  //   user.todolist.push(savedtodo);
-  //   await this.us.update(user.email, { todolist: user.todolist } as UpdateTodo1Dto);
-    
-  //   this.ns.create({
-  //     description: `You have a new todo : ${savedtodo.name}`,
-  //     user: user.name,
-  //   }, user._id);
-    
-  //   return savedtodo;
-  // }
+async result (id:any) {
+  
+  const fileToTreat = await this.fileModel.findOne({ _id: id });
+// add the pi funtion here with the fileToTreat.file argument
+  
+  const createdFile =  await this.fileModel.create({ 
+  })
 
+  // return file;
+
+
+}
   async findAll(): Promise<File[]> {
     return this.fileModel.find();
   }
