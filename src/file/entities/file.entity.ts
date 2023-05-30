@@ -17,6 +17,9 @@ export class File {
   type : string;
 
   @Prop()
+  path: string;
+
+  @Prop()
   description: string;
 
   @Prop()

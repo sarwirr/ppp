@@ -10,7 +10,8 @@ import { NotificationService } from 'src/notification/notification.service';
 import { UpdateUserDto } from 'src/user/dto/update-user.dto';
 import * as fs from 'fs';
 import { fromByteArray } from 'base64-js';
-import { CreateTodo1Dto } from './dto/create-file.dto';
+import { diskStorage } from 'multer';
+
 
 
 @Injectable()
@@ -22,19 +23,22 @@ export class FileService {
   private readonly us : UserService,
   private readonly ns: NotificationService) {}
 
-  
   async create(id:any ,@UploadedFile() file: Express.Multer.File) {
-    // console.log(id);
+
+     console.log(id);
     const user = await this.us.findUserbyId(id);
-    // console.log(user);
+     console.log(user);
     const fileContent = fs.readFileSync(file.path);
     const base64Content = fromByteArray(fileContent);
     const createdFile =  await this.fileModel.create({ 
       type: file.mimetype,
       name: file.originalname,
       file: base64Content,
-      owner: user._id
+      owner: user._id,
+      path: file.path,
     })
+
+    console.log(createdFile.path);
     // console.log(createdFile);
     user.fileList.push(createdFile);
     // console.log(user.fileList);
@@ -45,11 +49,10 @@ export class FileService {
 
 async result (id:any) {
   
-  const fileToTreat = await this.fileModel.findOne({ _id: id });
-// add the pi funtion here with the fileToTreat.file argument
-  
-  const createdFile =  await this.fileModel.create({ 
-  })
+const fileToTreat = await this.fileModel.findOne({ _id: id });
+console.log(fileToTreat);
+const fileContent = fileToTreat.file;
+
 
   // return file;
 
