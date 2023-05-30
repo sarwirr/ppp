@@ -7,9 +7,13 @@ import { UserModule } from 'src/user/user.module';
 import { User, UserSchema } from 'src/user/entities/user.entity';
 import { NotificationModule } from 'src/notification/notification.module';
 import { UploadController } from './upload.controller';
+import { HttpModule } from "@nestjs/axios";
+
 
 @Module({
-  imports: [UserModule,NotificationModule,
+  imports: [
+    HttpModule,
+    UserModule,NotificationModule,
     MongooseModule.forFeature([{ name: File.name, schema: FileSchema }]),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
   ],

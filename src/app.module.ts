@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { NotificationModule } from './notification/notification.module';
 import { MulterModule } from '@nestjs/platform-express';
+
 require('dotenv').config(); 
 
 @Module({
@@ -15,6 +16,7 @@ require('dotenv').config();
     MulterModule.register({
     dest: './uploads',
   }),
+    
     Todo1Module,
     MongooseModule.forRoot(
       process.env.MONGODB_KEY,

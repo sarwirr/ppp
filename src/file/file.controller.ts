@@ -19,22 +19,30 @@ import { ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import uniqueFileName from 'src/utils/uniqueFileName';
+import axios from 'axios';
+
 
 @UseGuards(JwtAuthGuard)
 @Controller('file')
 @UseGuards(JwtAuthGuard)
 export class FileController {
-  constructor(private readonly FileService: FileService) {}
+  constructor(private readonly FileService: FileService,
+   ) {}
 
   
   @Post()
   @UseInterceptors(FileInterceptor('file', {storage: diskStorage({destination :'/home/sarwir/files',filename:(req,file,cb)=>{
   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
   cb(null, file.filename + '-' + uniqueSuffix); },}
-
     )}))
   create(@Request() req, @UploadedFile() file: Express.Multer.File) {
   return this.FileService.create(req.user.userId,file);
+  }
+
+  @Get('showresult')
+  async showresult(@Request() req) {
+    
+    return this.FileService.showresult(req.user.userId);
   }
 
 @Get('testtest/:id')
