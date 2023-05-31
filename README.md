@@ -24,7 +24,7 @@ This Mobile Application present these features
 
 
 ## Architecture 
-
+![Architecture](https://github.com/sarwirr/ppp/blob/master/uploads/simplearch.png)
 
 ## Why did I choose this framework and architecture?
 About the framework, I liked the possibility of using a framework made for typescript and the documentation is really completed. But after my first project with this framework, I realized that the common architecture from the documentation was not the best choice. Of course, at the beginning everything is fine, the problem arrive always after some months when the specs change again and again. For that reason, I tried a few architectures and stoped on clean architecture. Clean architecture gives me a solution to my problem.
