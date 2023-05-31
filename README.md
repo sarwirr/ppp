@@ -5,28 +5,34 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Back-end PPP
+
+
+## Introduction 
+Introducing our Personal Project an android application to recognize handwritten digits that uses machine learning techniques to recognise as well as clarifying handwritten digits.the mobile application allows the user to draw on the device touchscreen and the program will accurately identify and display the result.
 
 ## Description
 
+This Mobile Application present these features
+
+- The application provides a user-friendly interface where users can draw or write digits using their finger or a stylus on the touchscreen.
+- Before the digit recognition process, the application applies various image processing techniques to enhance the quality of the input image. This may involve resizing, normalization, and noise reduction to improve accuracy.
+- The application allows you to own your own account accessible via credentials.
+
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+
+## Architecture 
+
+
+## Why did I choose this framework and architecture?
+About the framework, I liked the possibility of using a framework made for typescript and the documentation is really completed. But after my first project with this framework, I realized that the common architecture from the documentation was not the best choice. Of course, at the beginning everything is fine, the problem arrive always after some months when the specs change again and again. For that reason, I tried a few architectures and stoped on clean architecture. Clean architecture gives me a solution to my problem.
+
+
+
 ## Installation
+
 
 ```bash
 $ npm install
